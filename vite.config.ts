@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 // Base path is configurable: set VITE_BASE (e.g. "/voiceledger-web/") for a
-// GitHub Pages project site, or leave unset for "/" (user site / custom domain).
+// GitHub Pages project site, or leave unset (production defaults to /VoiceLedger-AI-Expense-Tracker/).
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  let base = process.env.VITE_BASE ?? env.VITE_BASE ?? '/'
+  const defaultBase = mode === 'production' ? '/VoiceLedger-AI-Expense-Tracker/' : '/'
+  let base = process.env.VITE_BASE ?? env.VITE_BASE ?? defaultBase
   if (!base.startsWith('/')) base = `/${base}`
   if (!base.endsWith('/')) base = `${base}/`
   // Optional absolute site URL (e.g. https://user.github.io/voiceledger-web/) so
